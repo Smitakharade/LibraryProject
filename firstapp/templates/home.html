@@ -1,0 +1,116 @@
+{% load static %}
+<html>
+
+<head>
+    <title>Welcome to Library</title>       <!--title should always be in the head tag-->
+    <link href="{% static 'css\bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+        .required::before{
+            content: '*';
+            color: red;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Library Application</h1><hr>
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+        {% if single_book %}
+            <label class="required">ID</label>
+                <input type="text" name="book_id" value="{{single_book.id}}" readonly><br><br>
+        {% endif %}
+
+        <label class="required">Name</label>
+            <input type="text" name="book_name" value="{{single_book.name}}" placeholder='Enter book name' required><br><br>
+        <label class="required">Quantity</label>
+            <input type="number" name="book_qty" value="{{single_book.qty}}" placeholder='Enter quantity' required><br><br>
+        <label class="required">Price</label>
+            <input type="number" name="book_price" value="{{single_book.price}}" placeholder='Enter price' required><br><br>
+        <label class="required">Author</label>
+            <input type="text" name="book_author" value="{{single_book.author}}" placeholder="Enter author's name" required><br><br>
+        <label class="required">is_published</label>
+        
+        {% if single_book%}
+            {% if single_book.is_published == True %}
+                Yes <input type="radio" name="book_is_published" value="Yes" checked> No <input type="radio" name="book_is_published" value="No"><br><br>
+            {%else%}
+                Yes <input type="radio" name="book_is_published" value="Yes"> No <input type="radio" name="book_is_published" value="No" checked><br><br>
+            {% endif %}
+        {%else%}
+            Yes <input type="radio" name="book_is_published" value="Yes"> No <input type="radio" name="book_is_published" value="No"><br><br>
+        {% endif %}
+        
+        <input type="button"  class="btn btn-success" value="Submit"><br><br>
+      
+
+        
+        <!--{{all_books}}<br>-->   <!--it will return the query set of names of the all books-->
+        <!--{% for book in all_books %}-->
+        <!--{{book.id}}----{{book.name}}----{{book.qty}}----{{book.price}}----{{book.author}}----{{book.is_published}}<br>-->
+        <!--{% endfor %}-->
+
+        <!--This is new for drop down menu instead of radio we can also use this-->
+        <!--<label>choose a car type</label>-->
+            <!--<select name="cars",multiple>-->  <!--using this we can select multiple cars at a time -->
+            <!--<select name="cars">-->                       <!--cars ki value backend me {'cars':'Select'} aise jayegi-->
+                <!--<option value="Select">Select</option>-->
+                <!--<option value="Volvo">Volvo</option>-->
+                <!--<option value="Polo">Polo</option>-->
+                <!--<option value="Audi">Audi</option>-->
+                <!--<option value="Vento">Vento</option>-->
+                <!--<option value="Mercedies">Mercedies</option>-->
+            <!--</select>-->
+        
+
+
+    </form>
+    <a href="/show_active_books">View Active Books</a>
+    <a href="/show_inactive_books">View Inactive Books</a>
+<!--<a href="/show_inactive_books">View Inactive Books</a>-->
+
+<!--<a href="{ % url 'show_books' % }">View Book Details</a>-->
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
